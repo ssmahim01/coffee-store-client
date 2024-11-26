@@ -5,15 +5,17 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
-import MainLayout from './MainLayout';
+import MainLayout from './Layouts/MainLayout';
 import AddCoffee from './components/AddCoffee';
 import UpdateCoffee from './components/UpdateCoffee';
+import ErrorPage from './ErrorPage/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: "/",
     loader: () => fetch("http://localhost:5000/coffee"),
     element: <MainLayout></MainLayout>,
+    errorElement: <ErrorPage></ErrorPage>
   },
   {
     path: "/addCoffee",

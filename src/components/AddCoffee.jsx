@@ -1,3 +1,4 @@
+import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -36,22 +37,25 @@ const AddCoffee = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        if (data.insertedId > 0) {
+        if (data.insertedId) {
           Swal.fire({
             title: "Success!",
             text: "Coffee Added Successfully",
             icon: "success",
             confirmButtonText: "Okay",
           });
+
+          form.reset();
         }
       });
   };
 
   return (
     <div className="py-20">
-       <Link to="/" className="md:ml-48 ml-5"><span className="italic text-3xl font-bold">Back to Home</span></Link>
+       <Link to="/" className="md:ml-48 ml-5 flex gap-3 items-center"><FaArrowLeft className="text-xl"/> <span className="font-rancho text-3xl font-bold">Back to Home</span></Link>
+
       <div className="md:w-3/4 mx-auto bg-[#F4F3F0] rounded-xl p-16 my-16">
-        <h2 className="text-3xl font-bold text-center pb-5 space-y-5">
+        <h2 className="md:text-5xl text-3xl font-bold text-center pb-10 space-y-5 font-rancho">
           Add New Coffee
         </h2>
 
@@ -153,7 +157,7 @@ const AddCoffee = () => {
           </div>
 
           <div className="form-control mt-5">
-            <button className="w-[82%] mx-auto btn bg-[#D2B48C] italic font-bold">
+            <button className="text-xl w-[82%] mx-auto btn bg-[#D2B48C] font-rancho font-semibold">
               Add Coffee
             </button>
           </div>

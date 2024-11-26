@@ -1,3 +1,5 @@
+import { FaEye } from "react-icons/fa";
+import { MdDelete, MdModeEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -24,8 +26,8 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
           .then((data) => {
             if (data.deletedCount > 0) {
               Swal.fire({
-                title: "Deleted!",
-                text: "Your Coffee has been deleted.",
+                title: "Good Luck!!!",
+                text: "Deleted Coffee Details",
                 icon: "success",
               });
 
@@ -67,19 +69,19 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
 
         <div className="card-actions justify-end">
           <div className="join join-vertical space-y-2">
-            <button className="btn join-item btn-info text-white font-bold">
-              View
+            <button className="btn join-item bg-[#D2B48C] text-white">
+            <FaEye className="text-2xl"/>
             </button>
             <Link to={`/updateCoffee/${_id}`}>
-            <button className="w-full btn join-item btn-warning text-white font-bold">
-              Edit
+            <button className="w-full btn btn-neutral text-white">
+            <MdModeEdit className="text-2xl"/>
             </button>
             </Link>
             <button
               onClick={() => handleDelete(_id)}
-              className="btn join-item btn-error text-white font-bold"
+              className="btn join-item btn-error text-white"
             >
-              Delete
+              <MdDelete className="text-2xl"/>
             </button>
           </div>
         </div>

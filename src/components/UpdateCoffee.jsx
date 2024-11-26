@@ -1,3 +1,4 @@
+import { FaArrowLeft } from "react-icons/fa";
 import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -54,9 +55,10 @@ const UpdateCoffee = () => {
 
   return (
     <div className="py-20">
-        <Link to="/" className="md:ml-48 ml-5"><span className="italic text-3xl font-bold">Back to Home</span></Link>
+         <Link to="/" className="md:ml-48 ml-5 flex gap-3 items-center"><FaArrowLeft className="text-xl"/> <span className="font-rancho text-3xl font-bold">Back to Home</span></Link>
+
       <div className="md:w-3/4 mx-auto bg-[#F4F3F0] rounded-xl p-16 my-16">
-        <h2 className="italic text-xl md:text-3xl font-extrabold text-center pb-5 space-y-5">
+        <h2 className="font-rancho text-3xl md:text-5xl font-extrabold text-center pb-10 space-y-5">
           Update Existing Coffee: {name}
         </h2>
 
@@ -165,7 +167,7 @@ const UpdateCoffee = () => {
           </div>
 
           <div className="form-control mt-5">
-            <button className="w-[82%] mx-auto btn bg-[#D2B48C] italic font-bold">
+            <button className="text-xl w-[82%] mx-auto btn bg-[#D2B48C] font-rancho font-semibold">
               Update Coffee Details
             </button>
           </div>
