@@ -1,4 +1,10 @@
-# Coffee Store
+# Espresso Emporium
+
+# Purpose
+
+The purpose of the website is anyone can view or add coffees for business. When an user will post the coffee details, it will store in the database before delete a specific coffee.
+
+# Setup
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
