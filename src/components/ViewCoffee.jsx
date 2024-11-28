@@ -26,17 +26,17 @@ const ViewCoffee = () => {
                 <h2 className="text-4xl text-[#331A15] md:text-left text-center font-rancho font-bold">{name}</h2>
 
                 <div className="space-y-3">
-                    <h3 className="text-lg font-semibold">Name: <span className="text-[#5C5B5B]">{name}</span></h3>
+                    <h3 className="md:text-base text-lg font-semibold">Name: <span className="text-[#5C5B5B]">{name}</span></h3>
 
-                    <h3 className="text-lg font-semibold">Quantity: <span className="text-[#5C5B5B]">{quantity}</span></h3>
+                    <h3 className="md:text-base text-lg font-semibold">Quantity: <span className="text-[#5C5B5B]">{quantity}</span></h3>
 
-                    <h3 className="text-lg font-semibold">Supplier: <span className="text-[#5C5B5B]">{supplier}</span></h3>
+                    <h3 className="md:text-base text-lg font-semibold">Supplier: <span className="text-[#5C5B5B]">{supplier}</span></h3>
 
-                    <h3 className="text-lg font-semibold">Taste: <span className="text-[#5C5B5B]">{taste}</span></h3>
+                    <h3 className="md:text-base text-lg font-semibold">Taste: <span className="text-[#5C5B5B]">{taste}</span></h3>
 
-                    <h3 className="text-lg font-semibold">Category: <span className="text-[#5C5B5B]">{category}</span></h3>
+                    <h3 className="md:text-base text-lg font-semibold">Category: <span className="text-[#5C5B5B]">{category}</span></h3>
 
-                    <h3 className="text-lg font-semibold">Details: <span className="text-[#5C5B5B]">{details}</span></h3>
+                    <h3 className="md:text-base text-lg font-semibold">Details: <span className="text-[#5C5B5B]">{details}</span></h3>
                 </div>
             </div>
           </div>

@@ -11,7 +11,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
     console.log(_id);
     Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "Are you sure that you want to delete it?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -41,7 +41,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   };
 
   return (
-    <div className="card lg:card-side bg-[#F5F4F1] bg-opacity-10 shadow-md py-2">
+    <div className="card lg:card-side bg-[#F5F4F1] bg-opacity-40 shadow-md border border-gray-300 py-2">
       <figure>
         <img src={photo} alt={name} />
       </figure>

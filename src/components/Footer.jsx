@@ -63,7 +63,7 @@ const Footer = () => {
             Connect with Us
           </h2>
 
-          <form className="space-y-5 *:w-full">
+          <form className="space-y-5">
             <div className="form-control">
               <input
                 type="text"
@@ -89,7 +89,7 @@ const Footer = () => {
               ></input>
             </div>
 
-            <button className="form-control btn btn-outline border-2 border-[#331A15] text-[#331A15] text-xl font-rancho font-semibold px-4 rounded-full">
+            <button className="form-control lg:w-1/3 w-full btn btn-outline border-2 border-[#331A15] text-[#331A15] text-xl font-rancho font-semibold px-4 rounded-full">
               Send Message
             </button>
           </form>

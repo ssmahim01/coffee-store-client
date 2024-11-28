@@ -13,7 +13,7 @@ const Banner = () => {
 
                 <p className="text-sm">It's coffee time - Sip & Savor - Relaxation in every sip! Get the nostalgia back!! Your companion of every moment!!! Enjoy the beautiful moments and make them memorable.</p>
 
-                <Link to="/"><button className="btn bg-[#E3B577] font-rancho rounded-none border-none text-xl font-medium">Learn More</button></Link>
+                <Link to="/learn"><button className="btn btn-outline hover:bg-[#E3B577] hover:text-gray-900 hover:border-none font-rancho rounded-none border-2 border-white text-xl text-white font-semibold">Learn More</button></Link>
             </div>
         </div>
     );
