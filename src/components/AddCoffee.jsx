@@ -52,9 +52,9 @@ const AddCoffee = () => {
 
   return (
     <div className="py-20">
-       <Link to="/" className="md:ml-48 ml-5 flex gap-3 items-center"><FaArrowLeft className="text-xl"/> <span className="font-rancho text-3xl font-bold">Back to Home</span></Link>
+       <Link to="/" className="lg:ml-48 ml-5 flex gap-3 items-center"><FaArrowLeft className="text-xl"/> <span className="font-rancho text-3xl font-bold">Back to Home</span></Link>
 
-      <div className="md:w-3/4 mx-auto bg-[#F4F3F0] rounded-xl p-16 my-16">
+      <div className="lg:w-3/4 mx-auto bg-[#F4F3F0] rounded-xl p-16 my-16">
         <h2 className="md:text-5xl text-3xl font-bold text-center pb-10 space-y-5 font-rancho">
           Add New Coffee
         </h2>

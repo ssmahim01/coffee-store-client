@@ -14,9 +14,9 @@ const Footer = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="md:w-4/5 w-11/12 mx-auto flex justify-between items-center p-14 gap-5">
+      <div className="lg:w-4/5 w-11/12 mx-auto flex md:flex-row flex-col justify-between items-center lg:p-14 p-5 gap-5">
         <div className="md:w-1/2 pt-12">
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-6">
             <figure>
               <img
                 className="w-16 h-16"
@@ -58,12 +58,12 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="md:w-2/5 pt-14">
-          <h2 className="md:text-4xl text-3xl text-[#331A15] font-bold font-rancho pb-10">
+        <div className="md:w-2/5 w-full pt-14 md:pb-0 pb-5">
+          <h2 className="text-4xl md:text-left text-center text-[#331A15] font-bold font-rancho pb-10">
             Connect with Us
           </h2>
 
-          <form className="space-y-5">
+          <form className="space-y-5 *:w-full">
             <div className="form-control">
               <input
                 type="text"

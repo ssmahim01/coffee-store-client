@@ -41,7 +41,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   };
 
   return (
-    <div className="card lg:card-side bg-[#F5F4F1] shadow-md py-2">
+    <div className="card lg:card-side bg-[#F5F4F1] bg-opacity-10 shadow-md py-2">
       <figure>
         <img src={photo} alt={name} />
       </figure>
@@ -69,9 +69,11 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
 
         <div className="card-actions justify-end">
           <div className="join join-vertical space-y-2">
+            <Link to={`/viewCoffee/${_id}`}>
             <button className="btn join-item bg-[#D2B48C] text-white">
             <FaEye className="text-2xl"/>
             </button>
+            </Link>
             <Link to={`/updateCoffee/${_id}`}>
             <button className="w-full btn btn-neutral text-white">
             <MdModeEdit className="text-2xl"/>
