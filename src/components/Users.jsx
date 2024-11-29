@@ -1,10 +1,44 @@
 import { useState } from "react";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Users = () => {
   const loadedUsers = useLoaderData();
   const [users, setUsers] = useState(loadedUsers);
+
+  const handleUserDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Are you sure that you want to delete the user?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete the user!",
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        // Delete from the database
+        fetch(`http://localhost:5000/users/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              Swal.fire({
+                title: "Good Luck!!!",
+                text: "Deleted the User",
+                icon: "success",
+              });
+
+              const remainingUsers = users.filter((user) => user._id !== id);
+              setUsers(remainingUsers);
+            }
+          });
+      }
+    });
+  };
 
   return (
     <div className="md:w-4/5 w-11/12 mx-auto py-12">
@@ -41,7 +75,10 @@ const Users = () => {
                       <MdOutlineEdit />
                     </button>
 
-                    <button className="text-rose-500 text-2xl">
+                    <button
+                      onClick={() => handleUserDelete(user._id)}
+                      className="text-rose-500 text-2xl"
+                    >
                       <MdDeleteOutline />
                     </button>
                   </div>
