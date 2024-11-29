@@ -11,6 +11,9 @@ import UpdateCoffee from './components/UpdateCoffee';
 import ErrorPage from './ErrorPage/ErrorPage';
 import Home from './pages/Home.jsx';
 import ViewCoffee from './components/ViewCoffee.jsx';
+import SignIn from './pages/SignIn.jsx';
+import SignUp from './pages/SignUp.jsx';
+import AuthProvider from './providers/AuthProvider.jsx';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +40,14 @@ const router = createBrowserRouter([
         loader: ({params}) => fetch(`http://localhost:5000/coffee/${params.id}`)
       },
       {
+        path: "/signIn",
+        element: <SignIn></SignIn>
+      },
+      {
+        path: "/signUp",
+        element: <SignUp></SignUp>
+      },
+      {
         path: "*",
         element: <ErrorPage></ErrorPage>,
       }
@@ -46,6 +57,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <AuthProvider>
     <RouterProvider router={router}></RouterProvider>
+    </AuthProvider>
   </StrictMode>,
 )

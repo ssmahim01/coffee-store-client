@@ -1,6 +1,5 @@
 import Banner from "../components/Banner";
 import FollowUs from "../components/FollowUs";
-import Navbar from "../components/Navbar";
 import PopularProducts from "../components/PopularProducts";
 import Review from "../components/Review";
 
