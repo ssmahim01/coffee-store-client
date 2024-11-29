@@ -28,11 +28,7 @@ const Navbar = () => {
 
             <div className="justify-end flex gap-4 items-center">
                 <Link to="/signIn">
-                <button className="btn btn-accent text-gray-100 md:text-xl text-lg font-rancho font-bold px-6">Sign In</button>
-                </Link>
-
-                <Link to="/signUp">
-                <button className="btn btn-outline border-2 hover:bg-rose-500 text-white md:text-xl text-lg font-rancho font-bold px-6">Sign Up</button>
+                <button className="btn btn-outline border-2 text-gray-100 hover:bg-violet-500 md:text-xl text-lg font-rancho font-bold px-6">Sign In</button>
                 </Link>
             </div>
         </div>
