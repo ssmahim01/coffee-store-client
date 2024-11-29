@@ -15,7 +15,23 @@ const SignIn = () => {
         signInUser(email, password)
         .then(result => {
             const user = result.user;
-            console.log(user);
+            // console.log(user);
+
+            const lastSignInTime = user?.metadata?.lastSignInTime;
+            const signInInfo = {email, lastSignInTime};
+
+            fetch("http://localhost:5000/users", {
+              method: "PATCH",
+              headers: {
+                'content-type': 'application/json'
+              },
+              body: JSON.stringify(signInInfo)
+            })
+            .then(res => res.json())
+            .then(data => {
+              console.log(data);
+            })
+
             e.target.reset();
         })
         .catch(error => {
@@ -76,6 +92,8 @@ const SignIn = () => {
                 </button>
               </div>
             </form>
+
+            <div className="text-center font-bold mb-9">If you are a new user? Please <Link to="/signUp" className="text-amber-500">Sign Up</Link></div>
           </div>
         </div>
       </div>
