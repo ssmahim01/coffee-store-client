@@ -4,7 +4,7 @@ import "./Navbar.css";
 
 const Navbar = () => {
     return (
-        <div className="md:px-24 px-10 flex justify-between items-center" style={{
+        <div className="lg:px-24 px-8 flex justify-between items-center" style={{
             backgroundImage: "url('/src/assets/more/navbarBG.jpg')",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
