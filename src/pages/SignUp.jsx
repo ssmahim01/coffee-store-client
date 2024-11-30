@@ -3,6 +3,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { FcGoogle } from "react-icons/fc";
 
 const SignUp = () => {
   const { createUser, setUser } = useContext(AuthContext);
@@ -131,6 +132,12 @@ const SignUp = () => {
                 </button>
               </div>
             </form>
+
+            <div className="text-center font-bold mb-2">Already Have An Account? Please <Link to="/signIn" className="text-cyan-500">Sign In</Link></div>
+
+            <div className="divider w-3/4 mx-auto">Or</div>
+
+            <button className="w-4/5 mx-auto btn btn-outline border-2 border-gray-200 rounded-full hover:btn-primary shadow-md mb-7 font-bold">Sign In with Google <FcGoogle className="text-xl" /></button>
           </div>
         </div>
       </div>

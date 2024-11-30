@@ -15,6 +15,7 @@ import SignIn from './pages/SignIn.jsx';
 import SignUp from './pages/SignUp.jsx';
 import AuthProvider from './providers/AuthProvider.jsx';
 import Users from './components/Users.jsx';
+import PrivateRoute from './PrivateRoute/PrivateRoute.jsx';
 
 const router = createBrowserRouter([
   {
@@ -28,16 +29,16 @@ const router = createBrowserRouter([
       },
       {
         path: "/addCoffee",
-        element: <AddCoffee></AddCoffee>
+        element: <PrivateRoute><AddCoffee></AddCoffee></PrivateRoute>
       },
       {
         path: "/viewCoffee/:id",
         loader: ({params}) => fetch(`https://espresso-emporium-server-lyart.vercel.app/coffee/${params.id}`),
-        element: <ViewCoffee></ViewCoffee>,
+        element: <ViewCoffee></ViewCoffee>
       },
       {
         path: "/updateCoffee/:id",
-        element: <UpdateCoffee></UpdateCoffee>,
+        element: <PrivateRoute><UpdateCoffee></UpdateCoffee></PrivateRoute>,
         loader: ({params}) => fetch(`https://espresso-emporium-server-lyart.vercel.app/coffee/${params.id}`)
       },
       {
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/usersProfile",
-        element: <Users></Users>,
+        element: <PrivateRoute><Users></Users></PrivateRoute>,
         loader: () => fetch("https://espresso-emporium-server-lyart.vercel.app/users")
       },
       {

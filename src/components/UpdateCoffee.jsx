@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 const UpdateCoffee = () => {
   const coffee = useLoaderData();
 
-  const { _id, name, quantity, supplier, taste, category, details, photo } =
+  const { _id, name, price, supplier, taste, category, details, photo } =
     coffee;
 
   const handleUpdateCoffee = (event) => {
@@ -13,7 +13,7 @@ const UpdateCoffee = () => {
 
     const form = event.target;
     const name = form.name.value;
-    const quantity = form.quantity.value;
+    const price = form.price.value;
     const supplier = form.supplier.value;
     const taste = form.taste.value;
     const category = form.category.value;
@@ -22,7 +22,7 @@ const UpdateCoffee = () => {
 
     const updatedCoffee = {
       name,
-      quantity,
+      price,
       supplier,
       taste,
       category,
@@ -30,7 +30,7 @@ const UpdateCoffee = () => {
       photo,
     };
 
-    console.log(updatedCoffee);
+    // console.log(updatedCoffee);
 
     fetch(`https://espresso-emporium-server-lyart.vercel.app/coffee/${_id}`, {
       method: 'PUT',
@@ -41,7 +41,7 @@ const UpdateCoffee = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.modifiedCount > 0) {
           Swal.fire({
             title: "Success!",
@@ -80,13 +80,13 @@ const UpdateCoffee = () => {
 
             <div className="form-control md:w-2/5">
               <label className="label">
-                <span className="label-text font-bold">Available Quantity</span>
+                <span className="label-text font-bold">Price</span>
               </label>
               <input
-                type="number"
-                placeholder="Enter Available Quantity"
-                defaultValue={quantity}
-                name="quantity"
+                type="text"
+                placeholder="Enter price"
+                defaultValue={price}
+                name="price"
                 className="input input-bordered w-full"
               />
             </div>

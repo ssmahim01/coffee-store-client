@@ -3,7 +3,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const ViewCoffee = () => {
   const coffeeInfo = useLoaderData();
-  const { _id, name, quantity, supplier, taste, category, details, photo } =
+  const { _id, name, price, supplier, taste, category, details, photo } =
     coffeeInfo;
 
   // console.log(coffeeInfo);
@@ -28,7 +28,7 @@ const ViewCoffee = () => {
                 <div className="space-y-3">
                     <h3 className="md:text-base text-lg font-semibold">Name: <span className="text-[#5C5B5B]">{name}</span></h3>
 
-                    <h3 className="md:text-base text-lg font-semibold">Quantity: <span className="text-[#5C5B5B]">{quantity}</span></h3>
+                    <h3 className="md:text-base text-lg font-semibold">Price: <span className="text-[#5C5B5B]">{price}</span></h3>
 
                     <h3 className="md:text-base text-lg font-semibold">Supplier: <span className="text-[#5C5B5B]">{supplier}</span></h3>
 

@@ -8,7 +8,7 @@ const AddCoffee = () => {
 
     const form = event.target;
     const name = form.name.value;
-    const quantity = form.quantity.value;
+    const price = form.price.value;
     const supplier = form.supplier.value;
     const taste = form.taste.value;
     const category = form.category.value;
@@ -17,7 +17,7 @@ const AddCoffee = () => {
 
     const newCoffee = {
       name,
-      quantity,
+      price,
       supplier,
       taste,
       category,
@@ -25,7 +25,7 @@ const AddCoffee = () => {
       photo,
     };
 
-    console.log(newCoffee);
+    // console.log(newCoffee);
 
     fetch("https://espresso-emporium-server-lyart.vercel.app/coffee", {
       method: "POST",
@@ -36,7 +36,7 @@ const AddCoffee = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.insertedId) {
           Swal.fire({
             title: "Success!",
@@ -76,12 +76,12 @@ const AddCoffee = () => {
 
             <div className="form-control md:w-2/5">
               <label className="label">
-                <span className="label-text font-bold">Available Quantity</span>
+                <span className="label-text font-bold">Price</span>
               </label>
               <input
-                type="number"
-                placeholder="Enter Available Quantity"
-                name="quantity"
+                type="text"
+                placeholder="Enter price"
+                name="price"
                 className="input input-bordered w-full"
               />
             </div>

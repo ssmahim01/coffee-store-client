@@ -1,14 +1,17 @@
+import { useContext } from "react";
 import { FaEye } from "react-icons/fa";
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../providers/AuthProvider";
 
 const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
-  const { _id, name, quantity, supplier, taste, category, photo } =
-    coffee;
+  const { _id, name, price, supplier, taste, category, photo } = coffee;
+
+  const { user } = useContext(AuthContext);
 
   const handleDelete = (_id) => {
-    console.log(_id);
+    // console.log(_id);
     Swal.fire({
       title: "Are you sure?",
       text: "Are you sure that you want to delete it?",
@@ -19,9 +22,12 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://espresso-emporium-server-lyart.vercel.app/coffee/${_id}`, {
-          method: 'DELETE',
-        })
+        fetch(
+          `https://espresso-emporium-server-lyart.vercel.app/coffee/${_id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((response) => response.json())
           .then((data) => {
             if (data.deletedCount > 0) {
@@ -31,7 +37,9 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
                 icon: "success",
               });
 
-              const remaining = coffees.filter(coffeeData => coffeeData._id !== _id);
+              const remaining = coffees.filter(
+                (coffeeData) => coffeeData._id !== _id
+              );
 
               setCoffees(remaining);
             }
@@ -51,7 +59,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
             Name: <span className="text-gray-500">{name}</span>
           </h2>
           <p className="font-bold">
-            Quantity: <span className="text-gray-500">{quantity}</span>
+            Price: <span className="text-gray-500">${price}</span>
           </p>
 
           <p className="font-bold">
@@ -70,21 +78,23 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
         <div className="card-actions justify-end">
           <div className="join join-vertical space-y-2">
             <Link to={`/viewCoffee/${_id}`}>
-            <button className="btn join-item bg-[#D2B48C] text-white">
-            <FaEye className="text-2xl"/>
-            </button>
+              <button className="btn join-item bg-[#D2B48C] text-white">
+                <FaEye className="text-2xl" />
+              </button>
             </Link>
             <Link to={`/updateCoffee/${_id}`}>
-            <button className="w-full btn btn-neutral text-white">
-            <MdModeEdit className="text-2xl"/>
-            </button>
+              <button className="w-full btn btn-neutral text-white">
+                <MdModeEdit className="text-2xl" />
+              </button>
             </Link>
-            <button
-              onClick={() => handleDelete(_id)}
-              className="btn join-item btn-error text-white"
-            >
-              <MdDelete className="text-2xl"/>
-            </button>
+            {user && (
+              <button
+                onClick={() => handleDelete(_id)}
+                className="btn join-item btn-error text-white"
+              >
+                <MdDelete className="text-2xl" />
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -97,7 +97,7 @@ const Footer = () => {
       </div>
 
       <div className="h-12" style={{
-        backgroundImage: "url('/public/coffee-seeds.jpg')",
+        backgroundImage: "url('coffee-seeds.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat"
