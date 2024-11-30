@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <footer
       style={{
-        backgroundImage: "url('/src/assets/more/footer-bg.jpg')",
+        backgroundImage: "url('footer-bg.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -97,7 +97,7 @@ const Footer = () => {
       </div>
 
       <div className="h-12" style={{
-        backgroundImage: "url('/src/assets/more/coffee-seeds.jpg')",
+        backgroundImage: "url('/public/coffee-seeds.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat"

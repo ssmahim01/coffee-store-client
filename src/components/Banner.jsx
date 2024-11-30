@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Banner = () => {
     return (
         <div style={{
-            backgroundImage: "url('/src/assets/more/coffee-cup-bg.png')",
+            backgroundImage: "url('coffee-cup-bg.png')",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
             backgroundPosition: "center"

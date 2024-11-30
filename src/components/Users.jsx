@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { FaUserPlus } from "react-icons/fa";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Users = () => {
@@ -20,7 +21,7 @@ const Users = () => {
     .then((result) => {
       if (result.isConfirmed) {
         // Delete from the database
-        fetch(`http://localhost:5000/users/${id}`, {
+        fetch(`https://espresso-emporium-server-lyart.vercel.app/users/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -43,11 +44,15 @@ const Users = () => {
   return (
     <div className="md:w-4/5 w-11/12 mx-auto py-12">
       <div className="overflow-x-auto">
-        <table className="table">
+        <Link to="/signIn">
+          <button className="btn btn-outline border-2 border-indigo-500 rounded-full text-lg hover:bg-violet-500 hover:border-none font-bold shadow-md">New User <FaUserPlus /></button>
+        </Link>
+
+        <table className="table mt-8">
           {/* head */}
-          <thead>
+          <thead className="bg-gray-900 *:text-white font-bold">
             <tr>
-              <th></th>
+              <th>ID</th>
               <th>Photo</th>
               <th>Name</th>
               <th>Email</th>
@@ -73,13 +78,13 @@ const Users = () => {
                 <td>{user.lastSignInTime}</td>
                 <td>
                   <div className="flex gap-2 items-center">
-                    <button className="text-info text-2xl">
+                    <button className="text-info text-2xl border border-gray-200 shadow-md p-2 rounded-lg">
                       <MdOutlineEdit />
                     </button>
 
                     <button
                       onClick={() => handleUserDelete(user._id)}
-                      className="text-rose-500 text-2xl"
+                      className="text-rose-500 text-2xl border border-gray-200 shadow-md p-2 rounded-lg"
                     >
                       <MdDeleteOutline />
                     </button>

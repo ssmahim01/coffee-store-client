@@ -20,7 +20,7 @@ const SignIn = () => {
             const lastSignInTime = user?.metadata?.lastSignInTime;
             const signInInfo = {email, lastSignInTime};
 
-            fetch("http://localhost:5000/users", {
+            fetch("https://espresso-emporium-server-lyart.vercel.app/users", {
               method: "PATCH",
               headers: {
                 'content-type': 'application/json'
