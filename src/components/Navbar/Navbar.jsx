@@ -47,8 +47,9 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[5] mt-3 w-52 p-4 shadow-sm font-bold"
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[5] mt-3 w-56 p-3 shadow-sm font-bold"
           >
+            <p className="text-sm font-semibold text-emerald-600 block md:hidden mb-1">{user?.email}</p>
             {links}
           </ul>
         </div>
@@ -73,7 +74,7 @@ const Navbar = () => {
 
       {user ? (
         <div className="flex gap-3 items-center">
-          <img className="w-10 h-10 rounded-full" src={user?.photo} alt={user?.name} />
+         <p className="text-sm font-semibold text-white md:block hidden">{user?.email}</p>
 
           <button onClick={signOutUser} className="btn bg-rose-500 border-none text-white text-lg  font-bold font-rancho rounded-none">Sign Out</button>
         </div>

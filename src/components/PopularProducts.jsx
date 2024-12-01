@@ -11,7 +11,7 @@ const PopularProducts = () => {
     <div
       className="space-y-5 pb-16"
       style={{
-        backgroundImage: "url('/src/assets/more/popular-products.png')",
+        backgroundImage: "url('popular-products.png')",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}

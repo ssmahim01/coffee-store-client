@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
 
 const SignUp = () => {
-  const { createUser, setUser } = useContext(AuthContext);
+  const { createUser, signInWithGoogle, setUser } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleSignUp = (event) => {
     event.preventDefault();
@@ -22,6 +24,7 @@ const SignUp = () => {
         const user = result?.user;
         const createdTime = user?.metadata?.creationTime;
         setUser(user);
+        navigate(location?.state ? location.state : "/");
 
         const newUser = {
           name,
@@ -56,8 +59,61 @@ const SignUp = () => {
       })
       .catch((error) => {
         const errorMessage = error.message;
-        alert(errorMessage);
+        // alert(errorMessage);
+        Swal.fire({
+          title: "Error!",
+          position: "center",
+          icon: "error",
+          title: "Failed to Sign Up",
+          confirmButtonText: "Okay",
+        })
       });
+  };
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+    .then(result => {
+      const user = result?.user;
+      const name = user?.displayName;
+      const email = user?.email;
+      const photo = user?.photoURL;
+      const createdTime = user?.metadata?.creationTime;
+      const newUser = {name, photo, email, createdTime};
+      setUser(user);
+      navigate(location?.state ? location.state : "/");
+
+      fetch("https://espresso-emporium-server-lyart.vercel.app/users", {
+        method: "POST",
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(newUser)
+      })
+      .then(res => res.json())
+      .then(data => {
+        // console.log(data);
+        if(data.insertedId){
+          Swal.fire({
+            title: "Success!",
+            text: "Google Sign In Successful",
+            icon: "success",
+            confirmButtonText: "Okay",
+          })
+        }
+      })
+
+      .catch(error => {
+        const errorMessage = error.message;
+        // alert(errorMessage);
+        Swal.fire({
+          title: "Error!",
+          position: "center",
+          icon: "error",
+          title: "Failed to Google Sign In",
+          confirmButtonText: "Okay",
+        })
+      })
+    })
   };
 
   return (
@@ -68,9 +124,9 @@ const SignUp = () => {
       </Link>
 
       <div className="hero py-16">
-        <div className="hero-content flex-col">
+        <div className="hero-content md:w-4/12 mx-auto w-full flex-col">
           <div className="text-center lg:text-left">
-            <h1 className="md:text-4xl text-3xl font-bold">Sign Up Now!</h1>
+            <h1 className="md:text-5xl text-4xl font-bold">Sign Up Now!</h1>
           </div>
           <div className="card bg-base-100 w-full shrink-0 shadow-md mt-6">
             <form className="card-body" onSubmit={handleSignUp}>
@@ -82,7 +138,7 @@ const SignUp = () => {
                   type="text"
                   placeholder="Name"
                   name="name"
-                  className="input input-bordered md:w-96 w-full"
+                  className="input input-bordered w-full"
                   required
                 />
               </div>
@@ -95,7 +151,7 @@ const SignUp = () => {
                   type="text"
                   placeholder="Photo URL"
                   name="photo"
-                  className="input input-bordered md:w-96 w-full"
+                  className="input input-bordered w-full"
                   required
                 />
               </div>
@@ -108,7 +164,7 @@ const SignUp = () => {
                   type="email"
                   placeholder="Email"
                   name="email"
-                  className="input input-bordered md:w-96 w-full"
+                  className="input input-bordered w-full"
                   required
                 />
               </div>
@@ -121,7 +177,7 @@ const SignUp = () => {
                   type="password"
                   placeholder="Password"
                   name="password"
-                  className="input input-bordered md:w-96 w-full"
+                  className="input input-bordered w-full"
                   required
                 />
               </div>
@@ -133,11 +189,11 @@ const SignUp = () => {
               </div>
             </form>
 
-            <div className="text-center font-bold mb-2">Already Have An Account? Please <Link to="/signIn" className="text-cyan-500">Sign In</Link></div>
+            <div className="text-center font-bold mb-2 px-6">Already Have An Account? Please <Link to="/signIn" className="text-cyan-500">Sign In</Link></div>
 
             <div className="divider w-3/4 mx-auto">Or</div>
 
-            <button className="w-4/5 mx-auto btn btn-outline border-2 border-gray-200 rounded-full hover:btn-primary shadow-md mb-7 font-bold">Sign In with Google <FcGoogle className="text-xl" /></button>
+            <button onClick={handleGoogleSignIn} className="w-4/5 mx-auto btn btn-outline border-2 border-gray-200 rounded-full hover:btn-primary shadow-md mb-7 font-bold">Sign In with Google <FcGoogle className="text-xl" /></button>
           </div>
         </div>
       </div>

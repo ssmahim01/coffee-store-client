@@ -1,13 +1,14 @@
 import { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 
 const PrivateRoute = ({children}) => {
     const {user, loading} = useContext(AuthContext);
+    const location = useLocation();
 
     if(loading){
-        return <div>
-            <span className="loading loading-infinity loading-lg text-primary"></span>
+        return <div className="flex justify-center items-center py-40">
+            <span className="loading loading-infinity loading-lg text-primary text-xl"></span>
         </div>
     }
 
@@ -16,7 +17,7 @@ const PrivateRoute = ({children}) => {
     }
 
     return (
-        <Navigate to="/signIn"></Navigate>
+        <Navigate state={location.pathname} to="/signIn"></Navigate>
     );
 };
 

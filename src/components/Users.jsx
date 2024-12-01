@@ -43,11 +43,11 @@ const Users = () => {
 
   return (
     <div className="md:w-4/5 w-11/12 mx-auto py-12">
-      <div className="overflow-x-auto">
         <Link to="/signIn">
           <button className="btn btn-outline border-2 border-indigo-500 rounded-full text-lg hover:bg-violet-500 hover:border-none font-bold shadow-md">New User <FaUserPlus /></button>
         </Link>
 
+      <div className="overflow-x-auto">
         <table className="table mt-8">
           {/* head */}
           <thead className="bg-gray-900 *:text-white font-bold">
@@ -67,15 +67,15 @@ const Users = () => {
                 <th>{index + 1}</th>
                 <td>
                   <img
-                    className="w-12 h-12 rounded-lg"
-                    src={user.photo}
-                    alt={user.name}
+                    className="w-12 lg:h-12 h-10 rounded-lg"
+                    src={user?.photo}
+                    alt={user?.name}
                   />
                 </td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.createdTime}</td>
-                <td>{user.lastSignInTime}</td>
+                <td>{user?.name}</td>
+                <td>{user?.email}</td>
+                <td>{user?.createdTime}</td>
+                <td>{user?.lastSignInTime}</td>
                 <td>
                   <div className="flex gap-2 items-center">
                     <button className="text-info text-2xl border border-gray-200 shadow-md p-2 rounded-lg">
