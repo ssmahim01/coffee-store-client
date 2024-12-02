@@ -20,7 +20,7 @@ const UpdateProfile = () => {
 
     const userInfo = { name, photo };
 
-    const profile = { name: displayName, photo: photoURL };
+    const profile = {displayName:name, photoURL:photo };
 
     fetch(`https://espresso-emporium-server-lyart.vercel.app/users/${_id}`, {
       method: "PUT",
@@ -41,7 +41,7 @@ const UpdateProfile = () => {
 
           updateUserProfile(profile)
             .then(() => {
-              navigate("/users");
+              navigate("/usersProfile");
             })
             .catch((error) => {
               // console.log(error.message);
@@ -70,7 +70,7 @@ const UpdateProfile = () => {
         <div className="hero py-16">
           <div className="hero-content lg:w-4/12 md:w-3/4 mx-auto w-full flex-col">
             <div className="text-center lg:text-left">
-              <h1 className="md:text-5xl text-4xl font-bold">
+              <h1 className="md:text-4xl text-3xl font-bold">
                 Update Your Profile
               </h1>
             </div>
@@ -105,7 +105,7 @@ const UpdateProfile = () => {
                 </div>
 
                 <div className="form-control mt-6">
-                  <button className="btn btn-success text-white text-xl font-rancho font-bold">
+                  <button className="btn btn-primary text-white text-xl font-rancho font-bold">
                     Update Info
                   </button>
                 </div>

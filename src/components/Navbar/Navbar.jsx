@@ -51,7 +51,7 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[5] mt-3 w-56 p-3 shadow-sm font-bold"
           >
             <div className="lg:hidden flex flex-col mb-1">
-            <img className="w-12 h-12 rounded-full border-2 border-lime-500 mb-1" src={user?.photoURL} alt={user?.displayName} />
+            <img className="w-12 h-12 bg-lime-100 rounded-full border-2 border-lime-400 mb-1" src={user?.photoURL} alt={user?.displayName} />
         <p className="text-sm font-semibold text-gray-800">{user?.displayName}</p>
         <p className="text-sm font-semibold text-emerald-600">{user?.email}</p>
         </div>
@@ -80,7 +80,7 @@ const Navbar = () => {
       {user ? (
         <div className="flex gap-3 items-center">
          <div className="lg:flex hidden gap-2 items-center">
-          <img className="w-10 h-10 rounded-full border-2 border-lime-500" src={user?.photoURL} alt={user?.displayName} />
+          <img className="w-10 h-10 rounded-full bg-lime-100 border-2 border-lime-400" src={user?.photoURL} alt={user?.displayName} />
 
         <div className="flex flex-col">
         <p className="text-sm font-semibold text-white md:block hidden">{user?.displayName}</p>
