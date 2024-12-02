@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase/firebase.init";
 import Swal from "sweetalert2";
@@ -12,6 +12,10 @@ const AuthProvider = ({children}) => {
 
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password);
+    };
+
+    const updateUserProfile = (profile) => {
+        return updateProfile(auth.currentUser, profile);
     };
 
     const signInUser = (email, password) => {
@@ -50,6 +54,7 @@ const AuthProvider = ({children}) => {
         setUser,
         loading,
         createUser,
+        updateUserProfile,
         signInUser,
         signInWithGoogle,
         signOutUser

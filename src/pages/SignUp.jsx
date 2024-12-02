@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
 
 const SignUp = () => {
-  const { createUser, signInWithGoogle, setUser } = useContext(AuthContext);
-  const location = useLocation();
+  const { createUser, updateUserProfile, signInWithGoogle, setUser } =
+    useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSignUp = (event) => {
@@ -24,14 +24,15 @@ const SignUp = () => {
         const user = result?.user;
         const createdTime = user?.metadata?.creationTime;
         setUser(user);
-        navigate(location?.state ? location.state : "/");
 
         const newUser = {
           name,
           photo,
           email,
-          createdTime
+          createdTime,
         };
+
+        const profile = { displayName: name, photoURL: photo };
 
         // Store user info to the database
         fetch("https://espresso-emporium-server-lyart.vercel.app/users", {
@@ -44,16 +45,29 @@ const SignUp = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            if(data.insertedId){
-                Swal.fire({
-                    title: "Success!",
-                    text: "User Added Successfully",
-                    icon: "success",
-                    confirmButtonText: "Okay",
-                })
+            if (data.insertedId) {
+              Swal.fire({
+                title: "Success!",
+                text: "User Added Successfully",
+                icon: "success",
+                confirmButtonText: "Okay",
+              });
 
-                form.reset();
-            };
+              form.reset();
+
+              updateUserProfile(profile).then(() => {
+                navigate("/signIn");
+              })
+              .catch((error) => {
+                // console.log(error.message);
+                swal.fire({
+                  title: "Error!",
+                  text: "Failed to Update",
+                  icon: "error",
+                  confirmButtonText: "Okay",
+                });
+              })
+            }
             // console.log(data);
           });
       })
@@ -66,54 +80,53 @@ const SignUp = () => {
           icon: "error",
           title: "Failed to Sign Up",
           confirmButtonText: "Okay",
-        })
+        });
       });
   };
 
   const handleGoogleSignIn = () => {
-    signInWithGoogle()
-    .then(result => {
+    signInWithGoogle().then((result) => {
       const user = result?.user;
       const name = user?.displayName;
       const email = user?.email;
       const photo = user?.photoURL;
       const createdTime = user?.metadata?.creationTime;
-      const newUser = {name, photo, email, createdTime};
+      const newUser = { name, photo, email, createdTime };
       setUser(user);
       navigate(location?.state ? location.state : "/");
 
       fetch("https://espresso-emporium-server-lyart.vercel.app/users", {
         method: "POST",
         headers: {
-          'content-type': 'application/json'
+          "content-type": "application/json",
         },
-        body: JSON.stringify(newUser)
+        body: JSON.stringify(newUser),
       })
-      .then(res => res.json())
-      .then(data => {
-        // console.log(data);
-        if(data.insertedId){
-          Swal.fire({
-            title: "Success!",
-            text: "Google Sign In Successful",
-            icon: "success",
-            confirmButtonText: "Okay",
-          })
-        }
-      })
-
-      .catch(error => {
-        const errorMessage = error.message;
-        // alert(errorMessage);
-        Swal.fire({
-          title: "Error!",
-          position: "center",
-          icon: "error",
-          title: "Failed to Google Sign In",
-          confirmButtonText: "Okay",
+        .then((res) => res.json())
+        .then((data) => {
+          // console.log(data);
+          if (data.insertedId) {
+            Swal.fire({
+              title: "Success!",
+              text: "Google Sign In Successful",
+              icon: "success",
+              confirmButtonText: "Okay",
+            });
+          }
         })
-      })
-    })
+
+        .catch((error) => {
+          const errorMessage = error.message;
+          // alert(errorMessage);
+          Swal.fire({
+            title: "Error!",
+            position: "center",
+            icon: "error",
+            title: "Failed to Google Sign In",
+            confirmButtonText: "Okay",
+          });
+        });
+    });
   };
 
   return (
@@ -124,7 +137,7 @@ const SignUp = () => {
       </Link>
 
       <div className="hero py-16">
-        <div className="hero-content md:w-4/12 mx-auto w-full flex-col">
+        <div className="hero-content lg:w-4/12 md:w-3/4 mx-auto w-full flex-col">
           <div className="text-center lg:text-left">
             <h1 className="md:text-5xl text-4xl font-bold">Sign Up Now!</h1>
           </div>
@@ -189,11 +202,21 @@ const SignUp = () => {
               </div>
             </form>
 
-            <div className="text-center font-bold mb-2 px-6">Already Have An Account? Please <Link to="/signIn" className="text-cyan-500">Sign In</Link></div>
+            <div className="text-center font-bold mb-2 px-6">
+              Already Have An Account? Please{" "}
+              <Link to="/signIn" className="text-cyan-500">
+                Sign In
+              </Link>
+            </div>
 
             <div className="divider w-3/4 mx-auto">Or</div>
 
-            <button onClick={handleGoogleSignIn} className="w-4/5 mx-auto btn btn-outline border-2 border-gray-200 rounded-full hover:btn-primary shadow-md mb-7 font-bold">Sign In with Google <FcGoogle className="text-xl" /></button>
+            <button
+              onClick={handleGoogleSignIn}
+              className="w-4/5 mx-auto btn btn-outline border-2 border-gray-200 rounded-full hover:btn-primary shadow-md mb-7 font-bold"
+            >
+              Sign In with Google <FcGoogle className="text-xl" />
+            </button>
           </div>
         </div>
       </div>

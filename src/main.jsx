@@ -16,6 +16,7 @@ import SignUp from './pages/SignUp.jsx';
 import AuthProvider from './providers/AuthProvider.jsx';
 import Users from './components/Users.jsx';
 import PrivateRoute from './PrivateRoute/PrivateRoute.jsx';
+import UpdateProfile from './pages/updateProfile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,11 @@ const router = createBrowserRouter([
         path: "/usersProfile",
         element: <PrivateRoute><Users></Users></PrivateRoute>,
         loader: () => fetch("https://espresso-emporium-server-lyart.vercel.app/users")
+      },
+      {
+        path: "/updateProfile/:id",
+        element: <UpdateProfile></UpdateProfile>,
+        loader: ({params}) => fetch(`https://espresso-emporium-server-lyart.vercel.app/users/${params.id}`)
       },
       {
         path: "*",

@@ -17,8 +17,7 @@ const Users = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete the user!",
-    })
-    .then((result) => {
+    }).then((result) => {
       if (result.isConfirmed) {
         // Delete from the database
         fetch(`https://espresso-emporium-server-lyart.vercel.app/users/${id}`, {
@@ -43,9 +42,11 @@ const Users = () => {
 
   return (
     <div className="md:w-4/5 w-11/12 mx-auto py-12">
-        <Link to="/signIn">
-          <button className="btn btn-outline border-2 border-indigo-500 rounded-full text-lg hover:bg-violet-500 hover:border-none font-bold shadow-md">New User <FaUserPlus /></button>
-        </Link>
+      <Link to="/signIn">
+        <button className="btn btn-outline border-2 border-indigo-500 rounded-full text-lg hover:bg-violet-500 hover:border-none font-bold shadow-md">
+          New User <FaUserPlus />
+        </button>
+      </Link>
 
       <div className="overflow-x-auto">
         <table className="table mt-8">
@@ -78,9 +79,11 @@ const Users = () => {
                 <td>{user?.lastSignInTime}</td>
                 <td>
                   <div className="flex gap-2 items-center">
-                    <button className="text-info text-2xl border border-gray-200 shadow-md p-2 rounded-lg">
-                      <MdOutlineEdit />
-                    </button>
+                    <Link to={`/updateProfile/${user._id}`}>
+                      <button className="text-info text-2xl border border-gray-200 shadow-md p-2 rounded-lg">
+                        <MdOutlineEdit />
+                      </button>
+                    </Link>
 
                     <button
                       onClick={() => handleUserDelete(user._id)}

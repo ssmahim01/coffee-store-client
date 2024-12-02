@@ -24,7 +24,6 @@ const SignIn = () => {
           const lastSignInTime = user?.metadata?.lastSignInTime;
           const signInInfo = {email, lastSignInTime};
           setUser(user);
-          navigate(location?.state ? location.state : "/");
 
             fetch("https://espresso-emporium-server-lyart.vercel.app/users", {
               method: "PATCH",
@@ -48,6 +47,8 @@ const SignIn = () => {
             })
 
             e.target.reset();
+
+            navigate(location?.state ? location.state : "/");
         })
         .catch(error => {
             const errorMessage = error.message;
@@ -117,7 +118,7 @@ const SignIn = () => {
       </Link>
 
       <div className="hero py-16">
-        <div className="hero-content md:w-4/12 mx-auto w-full flex-col">
+        <div className="hero-content lg:w-4/12 md:w-3/4 mx-auto w-full flex-col">
           <div className="text-center lg:text-left">
             <h1 className="md:text-5xl text-4xl font-bold">Sign In Now!</h1>
           </div>

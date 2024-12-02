@@ -6,6 +6,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
+  // console.log(user);
 
   const links = (
     <>
@@ -28,7 +29,7 @@ const Navbar = () => {
           <div
             tabIndex={0}
             role="button"
-            className="btn btn-ghost md:hidden text-white border-2 border-gray-300 shadow-md"
+            className="btn btn-ghost lg:hidden text-white border-2 border-gray-300 shadow-md"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +50,11 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[5] mt-3 w-56 p-3 shadow-sm font-bold"
           >
-            <p className="text-sm font-semibold text-emerald-600 block md:hidden mb-1">{user?.email}</p>
+            <div className="lg:hidden flex flex-col mb-1">
+            <img className="w-12 h-12 rounded-full border-2 border-lime-500 mb-1" src={user?.photoURL} alt={user?.displayName} />
+        <p className="text-sm font-semibold text-gray-800">{user?.displayName}</p>
+        <p className="text-sm font-semibold text-emerald-600">{user?.email}</p>
+        </div>
             {links}
           </ul>
         </div>
@@ -68,13 +73,20 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="text-lg text-white font-bold text-center md:flex gap-3 justify-center items-center hidden">
+      <div className="text-lg text-white font-bold text-center lg:flex gap-3 justify-center items-center hidden">
         {links}
       </div>
 
       {user ? (
         <div className="flex gap-3 items-center">
-         <p className="text-sm font-semibold text-white md:block hidden">{user?.email}</p>
+         <div className="lg:flex hidden gap-2 items-center">
+          <img className="w-10 h-10 rounded-full border-2 border-lime-500" src={user?.photoURL} alt={user?.displayName} />
+
+        <div className="flex flex-col">
+        <p className="text-sm font-semibold text-white md:block hidden">{user?.displayName}</p>
+        <p className="text-sm font-semibold text-white md:block hidden">{user?.email}</p>
+        </div>
+         </div>
 
           <button onClick={signOutUser} className="btn bg-rose-500 border-none text-white text-lg  font-bold font-rancho rounded-none">Sign Out</button>
         </div>
