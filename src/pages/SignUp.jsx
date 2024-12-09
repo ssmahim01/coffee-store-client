@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
+import axios from "axios";
 
 const SignUp = () => {
   const { createUser, updateUserProfile, signInWithGoogle, setUser } =
@@ -95,38 +96,65 @@ const SignUp = () => {
       setUser(user);
       navigate(location?.state ? location.state : "/");
 
-      fetch("https://espresso-emporium-server-lyart.vercel.app/users", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          // console.log(data);
-          if (data.insertedId) {
-            Swal.fire({
-              title: "Success!",
-              text: "Google Sign In Successful",
-              icon: "success",
-              confirmButtonText: "Okay",
-            });
-          }
-        })
-
-        .catch((error) => {
-          const errorMessage = error.message;
-          // alert(errorMessage);
+      // Using Axios
+      axios.post("https://espresso-emporium-server-lyart.vercel.app/users", newUser)
+      .then((data) => {
+        if (data.data.insertedId) {
           Swal.fire({
-            title: "Error!",
-            position: "center",
-            icon: "error",
-            title: "Failed to Google Sign In",
+            title: "Success!",
+            text: "Google Sign In Successful",
+            icon: "success",
             confirmButtonText: "Okay",
           });
+        }
+      })
+
+      .catch((error) => {
+        const errorMessage = error.message;
+        // console.log(errorMessage);
+        Swal.fire({
+          title: "Error!",
+          position: "center",
+          icon: "error",
+          title: "Failed to Google Sign In",
+          confirmButtonText: "Okay",
         });
-    });
+      });
+  });
+
+      // Using Fetch
+      // fetch("https://espresso-emporium-server-lyart.vercel.app/users", {
+      //   method: "POST",
+      //   headers: {
+      //     "content-type": "application/json",
+      //   },
+      //   body: JSON.stringify(newUser),
+      // })
+        // .then((res) => res.json())
+    //     .then((data) => {
+    //       // console.log(data);
+    //       if (data.insertedId) {
+    //         Swal.fire({
+    //           title: "Success!",
+    //           text: "Google Sign In Successful",
+    //           icon: "success",
+    //           confirmButtonText: "Okay",
+    //         });
+    //       }
+    //     })
+
+    //     .catch((error) => {
+    //       const errorMessage = error.message;
+    //       // alert(errorMessage);
+    //       Swal.fire({
+    //         title: "Error!",
+    //         position: "center",
+    //         icon: "error",
+    //         title: "Failed to Google Sign In",
+    //         confirmButtonText: "Okay",
+    //       });
+    //     });
+    // });
   };
 
   return (

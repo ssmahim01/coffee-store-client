@@ -4,6 +4,10 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 import "./index.css";
 import MainLayout from './Layouts/MainLayout';
 import AddCoffee from './components/AddCoffee';
@@ -17,6 +21,7 @@ import AuthProvider from './providers/AuthProvider.jsx';
 import Users from './components/Users.jsx';
 import PrivateRoute from './PrivateRoute/PrivateRoute.jsx';
 import UpdateProfile from './pages/updateProfile.jsx';
+import UsersProfile from './components/UsersProfile.jsx';
 
 const router = createBrowserRouter([
   {
@@ -50,10 +55,14 @@ const router = createBrowserRouter([
         path: "/signUp",
         element: <SignUp></SignUp>
       },
+      // {
+      //   path: "/usersProfile",
+      //   element: <PrivateRoute><Users></Users></PrivateRoute>,
+      //   loader: () => fetch("https://espresso-emporium-server-lyart.vercel.app/users")
+      // },
       {
         path: "/usersProfile",
-        element: <PrivateRoute><Users></Users></PrivateRoute>,
-        loader: () => fetch("https://espresso-emporium-server-lyart.vercel.app/users")
+        element: <PrivateRoute><UsersProfile></UsersProfile></PrivateRoute>,
       },
       {
         path: "/updateProfile/:id",
@@ -68,10 +77,14 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient();
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <QueryClientProvider client={queryClient}>
     <AuthProvider>
     <RouterProvider router={router}></RouterProvider>
     </AuthProvider>
+    </QueryClientProvider>
   </StrictMode>,
 )
